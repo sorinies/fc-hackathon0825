@@ -66,6 +66,7 @@ body {
 .progress-bar {
   height: 3rem;
   line-height: 3rem;
+  min-width: 2em;
 }
 .vote-bar {
   cursor: pointer;

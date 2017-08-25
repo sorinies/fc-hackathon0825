@@ -1,0 +1,23 @@
+{
+  "name": "fc-hackathon0825",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "json-server --watch -p 7000 js/data.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yujin-min/fc-hackathon0825.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yujin-min/fc-hackathon0825/issues"
+  },
+  "homepage": "https://github.com/yujin-min/fc-hackathon0825#readme",
+  "dependencies": {
+    "json-server": "^0.12.0"
+  }
+}
