@@ -29,17 +29,39 @@
         </ul>
       </div>
     </nav>
+    <div class="container write">
+      <div class="card">
+        <h4 class="card-header">새로 작성</h4>
+        <div class="card-body">
+          <form style="margin-bottom: 1rem;">
+            <div class="form-group">
+              <input type="text" class="form-control" id="battleTitleInput" placeholder="대결 주제">
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <input type="text" class="form-control" id="battleItemInput1" placeholder="대결 항목 1">
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" id="battleItemInput2" placeholder="대결 항목 2">
+              </div>
+            </div>
+          </form>
+          <button type="button" class="btn btn-primary">작성</button>
+        </div>
+      </div>
+    </div>
+    <hr>
     <div class="container battlelist">
-      <div class="card text-center">
+      <div class="card text-center" id="">
         <div class="card-body">
           <h4 class="card-title">대결 주제</h4>
           <div class="item-title-wrap clearfix">
-            <h6 class="card-subtitle mb-2 text-muted float-left item-title">아이템 제목</h6>
-            <h6 class="card-subtitle mb-2 text-muted float-right item-title">아이템 제목</h6>
+            <h6 class="card-subtitle mb-2 text-muted float-left item-title">대결 항목 1</h6>
+            <h6 class="card-subtitle mb-2 text-muted float-right item-title">대결 항목 2</h6>
           </div>
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated vote-bar" role="progressbar" style="width: 50%" id="">0</div>
-            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated vote-bar" role="progressbar" style="width: 50%" id="cid-">0</div>
+          <div class="progress" id="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated vote-bar" role="progressbar" style="width: 50%">0</div>
+            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated vote-bar" role="progressbar" style="width: 50%">0</div>
           </div>
         </div>
         <div class="card-footer text-muted">
@@ -47,6 +69,7 @@
         </div>
       </div>
     </div><!-- /.container -->
+
 
 
     <!-- Bootstrap core JavaScript
