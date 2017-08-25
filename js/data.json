@@ -21,6 +21,17 @@
       "name_1": "문장 한 줄 아래에",
       "vote_1": 0,
       "per_1": 50
+    },
+    {
+      "id": 2,
+      "title": "indent",
+      "date": "2017-08-25",
+      "name_0": "tab",
+      "vote_0": 0,
+      "per_0": 50,
+      "name_1": "space",
+      "vote_1": 0,
+      "per_1": 50
     }
   ]
 }
