@@ -5,6 +5,7 @@
   let lastIndex; 
 
   function drawContents(list) {
+    // 들어온 list를 html에 추가시킨다. 
     list.map(x => {
       lastIndex = x.id;
       html += `
@@ -64,6 +65,7 @@
     });
   }
 
+  // 인자로 id, 오른쪽, 왼쪽 투표수. 오른쪽, 왼쪽 퍼센트 값을 받는다. 
   function patchItem(id, vote_left, vote_right, per_left, per_right) {
     return new Promise((resolve, reject) => {
       var req = new XMLHttpRequest();
@@ -89,6 +91,7 @@
   getList()
     .then((res) => {
       battle = JSON.parse(res);
+      // 돔에 리스트 추가 
       drawContents(battle);
       return res;
     })
@@ -122,10 +125,12 @@
         // 선택한 항목의 반대편 width를 계산된 비율로 변경.    
         if (e.target.id == ($(this).parent().children().eq(0)[0]).id) {
           $(this).parent().children().eq(1).css('width', oppoPer + '%');
+          // 수정한 값을 데이터베이스에 저장한다. 
           patchItem($(this)[0].id[5], tempVote, oppoVote, tempPer, oppoPer)
           .then((res) => console.log(res)).catch((e) => console.log(e));
         } else if (e.target.id == ($(this).parent().children().eq(1)[0]).id) {
           $(this).parent().children().eq(0).css('width', oppoPer + '%');
+          // 수정한 값을 데이터베이스에 저장한다. 
           patchItem($(this)[0].id[5], oppoVote, tempVote, oppoPer, tempPer)
           .then((res) => console.log(res)).catch((e) => console.log(e));
         }
@@ -137,11 +142,12 @@
     })
 
   document.querySelector('.btn-primary').addEventListener('click', (e) => {
+    // 사용자가 입력한 값을 변수에 저장 
     const title = document.getElementById('battleTitleInput').value;
     const name_0 = document.getElementById('battleItemInput1').value;
     const name_1 = document.getElementById('battleItemInput2').value;
     const date = new Date();
-
+    // 만약 타이틀이 존재한다면 들어온 값을 객체로 만든다.
     if (title) {
       const newItem = {
         id: lastIndex + 1,
@@ -154,9 +160,10 @@
         vote_1: 0,
         per_1: 50
       };
-
+      // 객체를 데이터 베이스에 저장한다. 
       postList(newItem)
       .then((res) => {
+        // 새로 생성한 객체를 돔에 추가시킨다. 
         drawContents([res]);
       }).catch((e) => console.log(e));
     }
