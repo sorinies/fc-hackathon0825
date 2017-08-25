@@ -41,6 +41,7 @@ let battle = [
     html = ``;
     battleList.innerHTML = html;
     battle.map((x, i) => {
+      //let percent = [battle[i].item[0].vote/(battle[i].item[0].vote + battle[i].item[1].vote) * 100, battle[i].item[1].vote/(battle[i].item[0].vote + battle[i].item[1].vote) * 100]
       html += `
         <div class="card text-center" id="${battle[i].id}">
           <div class="card-body">
@@ -49,9 +50,9 @@ let battle = [
               <h6 class="card-subtitle mb-2 text-muted float-left item-title">${battle[i].item[0].name}</h6>
               <h6 class="card-subtitle mb-2 text-muted float-right item-title">${battle[i].item[1].name}</h6>
             </div>
-            <div class="progress" id="progress">
-              <div class="progress-bar progress-bar-striped progress-bar-animated vote-bar" role="progressbar" style="width: ${battle[i].item[0].per}%">${battle[i].item[0].vote}</div>
-              <div class="progress-bar bg-success progress-bar-striped progress-bar-animated vote-bar" role="progressbar" style="width: ${battle[i].item[1].per}%">${battle[i].item[1].vote}</div>
+            <div class="progress" id="progress-${battle[i].id}">
+              <div id="pBar-${battle[i].id}-0" class="progress-bar progress-bar-striped progress-bar-animated vote-bar" role="progressbar" style="width: ${battle[i].item[0].per}%">${battle[i].item[0].vote}</div>
+              <div id="pBar-${battle[i].id}-1" class="progress-bar bg-success progress-bar-striped progress-bar-animated vote-bar" role="progressbar" style="width: ${battle[i].item[1].per}%">${battle[i].item[1].vote}</div>
             </div>
           </div>
           <div class="card-footer text-muted">
@@ -60,8 +61,17 @@ let battle = [
         </div>
       `;
     }); 
-
     battleList.innerHTML = html;
   }
-  drawContents()
+  drawContents();
+  $('[id^=pBar-]').click(function(){
+    let tempPer;
+    let tempVote = $(this).text();
+    let oppoVote = $(this).closest('.progress-bar').text();
+    tempVote = tempVote * 1 + 1;
+    tempPer = $(this).css('width');
+    $(this)[0].innerText = tempVote;
+    console.log($(this).closest('.progress-bar').text());
+    $(this).css('width', "10%");
+  })
 //}())
