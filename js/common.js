@@ -64,14 +64,33 @@ let battle = [
     battleList.innerHTML = html;
   }
   drawContents();
-  $('[id^=pBar-]').click(function(){
-    let tempPer;
+  $('[id^=pBar-]').click(function(e){
+    let tempPer, oppoVote;
     let tempVote = $(this).text();
-    let oppoVote = $(this).closest('.progress-bar').text();
+
+    if (e.target.id == ($(this).parent().children().eq(0)[0]).id) {
+      oppoVote = $(this).parent().children().eq(1).text();
+    } else if (e.target.id == ($(this).parent().children().eq(1)[0]).id) {
+      oppoVote = $(this).parent().children().eq(0).text();
+    }
     tempVote = tempVote * 1 + 1;
-    tempPer = $(this).css('width');
-    $(this)[0].innerText = tempVote;
-    console.log($(this).closest('.progress-bar').text());
-    $(this).css('width', "10%");
+    oppoVote = oppoVote * 1;
+
+    tempPer = (tempVote / (oppoVote + tempVote) * 100) + '%';
+    oppoPer = (oppoVote / (oppoVote + tempVote) * 100) + '%';
+    
+    e.target.style.width = tempPer;
+
+    if (e.target.id == ($(this).parent().children().eq(0)[0]).id) {
+      //$(this).parent().children().eq(1)[0].css('width', function(){
+      //$(this).parent().children().eq(1)[0].style.width = oppoPer;
+      $(this).parent().children().eq(1).css('width', oppoPer);
+    } else if (e.target.id == ($(this).parent().children().eq(1)[0]).id) {
+      $(this).parent().children().eq(0).css('width', oppoPer);
+    }
+
+    e.target.innerText = tempVote;
+
+    //$(this).css('width', "10%");
   })
 //}())
