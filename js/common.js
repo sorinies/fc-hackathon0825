@@ -93,26 +93,33 @@
       return res;
     })
     .then((res) => {
+      // pBar로 시작하는 id의 오브젝트(프로그레스바)가 선택됐을 때 아래 구문을 실행한다.
       $('[id^=pBar-]').click(function(e){
+        /* 
+          tempPer: 선택한 항목의 비율
+          oppoPer: 반대편 항목의 비율
+          tempOppo: 선택한 항목의 득표수
+          oppoVote: 반대편 항목의 특표수
+        */
         let tempPer, oppoVote;
-        let tempVote = $(this).text();
-        let flag;
-    
+        let tempVote = $(this).text(); // 현재 득표수를 취득
+
+        // 선택한 항목의 반대편 득표수를 oppoVote에 대입
         if (e.target.id == ($(this).parent().children().eq(0)[0]).id) {
           oppoVote = $(this).parent().children().eq(1).text();
-          flag = true;
         } else if (e.target.id == ($(this).parent().children().eq(1)[0]).id) {
           oppoVote = $(this).parent().children().eq(0).text();
-          flag = false;
         }
-        tempVote = tempVote * 1 + 1;
+        tempVote = tempVote * 1 + 1; // 선택항 항목의 득표수를 +1
         oppoVote = oppoVote * 1;
 
-        tempPer = tempVote / (oppoVote + tempVote) * 100;
+        // 득표수로 비율을 구해 각 변수에 대입
+        tempPer = tempVote / (oppoVote + tempVote) * 100; 
         oppoPer = oppoVote / (oppoVote + tempVote) * 100;
         
-        e.target.style.width = tempPer + '%';
-    
+        e.target.style.width = tempPer + '%'; // 선택한 항목의 width를 계산된 비율로 변경.
+
+        // 선택한 항목의 반대편 width를 계산된 비율로 변경.    
         if (e.target.id == ($(this).parent().children().eq(0)[0]).id) {
           $(this).parent().children().eq(1).css('width', oppoPer + '%');
           patchItem($(this)[0].id[5], tempVote, oppoVote, tempPer, oppoPer)
@@ -122,7 +129,8 @@
           patchItem($(this)[0].id[5], oppoVote, tempVote, oppoPer, tempPer)
           .then((res) => console.log(res)).catch((e) => console.log(e));
         }
-    
+
+        // 선택한 항목의 득표수를 올려 표시.
         e.target.innerText = tempVote;
 
       });
